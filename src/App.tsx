@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { 
   Github, 
   Linkedin, 
@@ -102,36 +103,54 @@ const PUBLICATIONS = [
 ];
 
 export default function App() {
-  return (
-    <div className="min-h-screen bg-marty-cream px-6 py-8 md:py-12 md:px-12 lg:px-16 xl:px-24 cursor-default overflow-x-hidden pt-24 md:pt-28">
-      {/* Top Navigation Bar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-white border-b-4 border-marty-dark px-6 md:px-12 lg:px-24 py-4 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-marty-orange rounded-lg flex items-center justify-center border-2 border-marty-dark shadow-[3px_3px_0px_0px_#3A3A3A]">
-            <Zap className="w-5 h-5 text-white" />
-          </div>
-          <span className="font-display text-2xl uppercase tracking-tighter hidden sm:block">Sachin Ramesh</span>
-        </div>
-        
-        <div className="flex items-center gap-2 md:gap-6 overflow-x-auto no-scrollbar">
-          {NAV_LINKS.map(link => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              className="px-3 py-2 text-[10px] md:text-sm font-black uppercase tracking-widest text-marty-dark hover:text-marty-orange transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute bottom-0 left-3 right-3 h-1 bg-marty-orange scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            </a>
-          ))}
-        </div>
+  const [isScrolled, setIsScrolled] = useState(false);
 
-        <div className="hidden lg:flex items-center gap-4">
-          <div className="flex gap-1">
-            {[1,2,3].map(i => <div key={i} className="w-1 h-3 rounded-full bg-marty-dark/20"></div>)}
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-marty-cream px-6 py-8 md:py-12 md:px-12 lg:px-16 xl:px-24 cursor-default overflow-x-hidden pt-16 md:pt-28">
+      {/* Top Navigation Bar - Minimal Floating Capsule */}
+      <div className="fixed top-0 left-0 w-full z-50 flex justify-center p-4 md:p-6 pointer-events-none">
+        <motion.nav 
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className={`
+            pointer-events-auto
+            flex items-center gap-2 md:gap-8 px-3 md:px-8 py-2 md:py-3 
+            bg-white/80 backdrop-blur-lg border border-marty-dark/10
+            rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)]
+            transition-all duration-500 ease-out
+            ${isScrolled ? 'scale-95 py-1.5 md:py-2 bg-white/90 shadow-xl' : 'scale-100'}
+          `}
+        >
+          <div className="flex items-center">
+            <span className="font-display text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-marty-dark/70 whitespace-nowrap">
+              Sachin
+            </span>
           </div>
-        </div>
-      </nav>
+          
+          <div className="h-3 w-[1px] bg-marty-dark/10"></div>
+
+          <div className="flex items-center gap-0 md:gap-2 overflow-x-auto no-scrollbar sm:max-w-none">
+            {NAV_LINKS.map(link => (
+              <a 
+                key={link.name} 
+                href={link.href}
+                className="px-1.5 md:px-3 py-1 text-[8px] md:text-[10px] font-medium uppercase tracking-widest text-marty-dark/50 hover:text-marty-orange transition-colors relative group whitespace-nowrap"
+              >
+                {link.name}
+                <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-marty-orange scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+              </a>
+            ))}
+          </div>
+        </motion.nav>
+      </div>
 
       {/* Dynamic Background Element */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0 text-center flex items-center justify-center">
@@ -149,7 +168,7 @@ export default function App() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="lg:col-span-8 bg-white border-4 border-marty-dark p-6 md:p-16 rounded-[2rem] pop-shadow flex flex-col justify-between min-h-[auto] md:min-h-[700px] relative z-20"
         >
-          <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8 mb-4 md:mb-8 pb-2 md:pb-4">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8 mb-4 md:mb-8 pb-2 md:pb-4 relative">
             <div className="flex-1 pt-2 md:pt-0">
               <div className="flex items-center gap-4 mb-4 md:mb-6">
                 <motion.div 
@@ -172,7 +191,7 @@ export default function App() {
               initial={{ opacity: 0, rotate: -15, scale: 0.8 }}
               whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="hidden md:block relative md:w-64 md:h-64 flex-shrink-0 self-start lg:mt-4 pointer-events-none select-none order-2"
+              className="absolute right-0 top-20 md:top-0 md:relative w-20 h-20 md:w-64 md:h-64 flex-shrink-0 pointer-events-none select-none order-2 opacity-30 md:opacity-100"
             >
               {/* Central Doodle Node */}
               <motion.div
@@ -216,9 +235,9 @@ export default function App() {
                     y: { duration: 4 + i, repeat: Infinity, ease: "easeInOut" }
                   }}
                   style={{ top: doodle.top, left: doodle.left }}
-                  className={`absolute p-3 bg-white border-2 border-marty-dark rounded-xl shadow-[4px_4px_0px_0px_#3A3A3A] ${doodle.color} pointer-events-auto cursor-pointer pop-transition hover:scale-125 hover:rotate-0`}
+                  className={`absolute p-1.5 md:p-3 bg-white border-2 border-marty-dark rounded-lg md:rounded-xl shadow-[2px_2px_0px_0px_#3A3A3A] md:shadow-[4px_4px_0px_0px_#3A3A3A] ${doodle.color} pointer-events-auto cursor-pointer pop-transition hover:scale-125 hover:rotate-0`}
                 >
-                  <doodle.Icon className="w-5 h-5" />
+                  <doodle.Icon className="w-3 h-3 md:w-5 md:h-5" />
                 </motion.div>
               ))}
 
