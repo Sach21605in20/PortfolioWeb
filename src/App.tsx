@@ -139,14 +139,15 @@ export default function App() {
 
           <div className="flex items-center gap-0 md:gap-2 overflow-x-auto no-scrollbar sm:max-w-none">
             {NAV_LINKS.map(link => (
-              <a 
+              <motion.a 
                 key={link.name} 
                 href={link.href}
+                whileTap={{ scale: 0.9 }}
                 className="px-1.5 md:px-3 py-1 text-[8px] md:text-[10px] font-medium uppercase tracking-widest text-marty-dark/50 hover:text-marty-orange transition-colors relative group whitespace-nowrap"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-marty-orange scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-              </a>
+              </motion.a>
             ))}
           </div>
         </motion.nav>
@@ -236,6 +237,8 @@ export default function App() {
                   }}
                   style={{ top: doodle.top, left: doodle.left }}
                   className={`absolute p-1.5 md:p-3 bg-white border-2 border-marty-dark rounded-lg md:rounded-xl shadow-[2px_2px_0px_0px_#3A3A3A] md:shadow-[4px_4px_0px_0px_#3A3A3A] ${doodle.color} pointer-events-auto cursor-pointer pop-transition hover:scale-125 hover:rotate-0`}
+                  whileHover={{ scale: 1.25, rotate: 0 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <doodle.Icon className="w-3 h-3 md:w-5 md:h-5" />
                 </motion.div>
@@ -265,31 +268,56 @@ export default function App() {
 
           <div className="flex flex-col gap-4 mt-6 md:mt-12">
             <div className="flex flex-col xs:flex-row gap-4">
-              <a href="mailto:sachinrc2006@gmail.com" className="flex-1 py-4 bg-marty-dark text-white rounded-2xl font-display text-2xl uppercase tracking-wider hover:bg-marty-orange pop-transition flex items-center justify-center gap-3">
+              <motion.a 
+                href="mailto:sachinrc2006@gmail.com" 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1 py-4 bg-marty-dark text-white rounded-2xl font-display text-2xl uppercase tracking-wider hover:bg-marty-orange transition-colors flex items-center justify-center gap-3"
+              >
                 <Mail className="w-6 h-6" />
                 Get in touch
-              </a>
-              <a 
+              </motion.a>
+              <motion.a 
                 href="https://drive.google.com/file/d/1sElD5Tkf2jGaVYVkekQTVH_2YshXkvL-/view?usp=sharing" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-4 bg-white border-4 border-marty-dark text-marty-dark rounded-2xl font-display text-2xl uppercase tracking-wider hover:bg-marty-blue hover:text-white pop-transition flex items-center justify-center gap-3 shadow-[6px_6px_0px_0px_#3A3A3A]"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1 py-4 bg-white border-4 border-marty-dark text-marty-dark rounded-2xl font-display text-2xl uppercase tracking-wider hover:bg-marty-blue hover:text-white transition-all flex items-center justify-center gap-3 shadow-[6px_6px_0px_0px_#3A3A3A]"
               >
                 <ArrowUpRight className="w-6 h-6" />
                 Resume
-              </a>
+              </motion.a>
             </div>
             
             <div className="flex gap-4">
-              <a href="https://github.com/Sach21605in20" target="_blank" className="flex-1 p-4 bg-marty-cream border-2 border-marty-dark rounded-2xl pop-shadow-hover pop-transition flex items-center justify-center">
+              <motion.a 
+                href="https://github.com/Sach21605in20" 
+                target="_blank" 
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex-1 p-4 bg-marty-cream border-2 border-marty-dark rounded-2xl pop-shadow-hover transition-all flex items-center justify-center"
+              >
                 <Github className="w-8 h-8" />
-              </a>
-              <a href="https://www.linkedin.com/in/sachin-ramesh-448a46317" target="_blank" className="flex-1 p-4 bg-marty-cream border-2 border-marty-dark rounded-2xl pop-shadow-hover pop-transition flex items-center justify-center">
+              </motion.a>
+              <motion.a 
+                href="https://www.linkedin.com/in/sachin-ramesh-448a46317" 
+                target="_blank" 
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex-1 p-4 bg-marty-cream border-2 border-marty-dark rounded-2xl pop-shadow-hover transition-all flex items-center justify-center"
+              >
                 <Linkedin className="w-8 h-8" />
-              </a>
-              <a href="https://leetcode.com/u/__Sachin/" target="_blank" className="flex-1 p-4 bg-marty-cream border-2 border-marty-dark rounded-2xl pop-shadow-hover pop-transition flex items-center justify-center">
+              </motion.a>
+              <motion.a 
+                href="https://leetcode.com/u/__Sachin/" 
+                target="_blank" 
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex-1 p-4 bg-marty-cream border-2 border-marty-dark rounded-2xl pop-shadow-hover transition-all flex items-center justify-center"
+              >
                 <Terminal className="w-8 h-8" />
-              </a>
+              </motion.a>
             </div>
           </div>
         </motion.header>
@@ -407,15 +435,17 @@ export default function App() {
               </div>
 
               <div className="flex flex-wrap gap-4 mt-10">
-                <a 
+                <motion.a 
                   href="https://github.com/Sach21605in20/Code-Vulnerability-Detection" 
                   target="_blank"
-                  className="flex items-center gap-3 px-8 py-4 bg-marty-dark text-white rounded-2xl font-display text-xl uppercase tracking-wider hover:bg-marty-orange pop-transition"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center gap-3 px-8 py-4 bg-marty-dark text-white rounded-2xl font-display text-xl uppercase tracking-wider hover:bg-marty-orange transition-all"
                 >
                   <Github className="w-6 h-6" />
                   Visit Repo
                   <ArrowUpRight className="w-5 h-5" />
-                </a>
+                </motion.a>
               </div>
             </div>
 
@@ -467,6 +497,7 @@ export default function App() {
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.1 }}
                 whileHover={{ y: -8, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
                 className={`relative group cursor-pointer ${idx === 0 ? 'lg:col-span-2' : ''}`}
               >
                 {/* Type 1: Folder Style */}
@@ -510,9 +541,15 @@ export default function App() {
                       </div>
                       <div className="flex items-center gap-2 md:gap-3">
                         {p.link && (
-                          <a href={p.link} target="_blank" className="p-3 md:p-4 bg-white rounded-xl md:rounded-2xl border-2 border-marty-dark hover:bg-marty-dark hover:text-white transition-all hover:-translate-y-1 shadow-[4px_4px_0px_0px_#3A3A3A] md:shadow-[6px_6px_0px_0px_#3A3A3A]">
+                          <motion.a 
+                            href={p.link} 
+                            target="_blank" 
+                            whileHover={{ y: -4 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="p-3 md:p-4 bg-white rounded-xl md:rounded-2xl border-2 border-marty-dark hover:bg-marty-dark hover:text-white transition-all hover:-translate-y-1 shadow-[4px_4px_0px_0px_#3A3A3A] md:shadow-[6px_6px_0px_0px_#3A3A3A]"
+                          >
                             <Github className="w-5 h-5 md:w-6 md:h-6" />
-                          </a>
+                          </motion.a>
                         )}
                         <div className="bg-white text-marty-dark px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl font-black border-2 border-marty-dark shadow-[4px_4px_0px_0px_#3A3A3A] md:shadow-[6px_6px_0px_0px_#3A3A3A] flex flex-col items-center">
                           <span className="font-mono text-[8px] md:text-xs leading-none mb-1 opacity-50">YEAR</span>
@@ -571,6 +608,7 @@ export default function App() {
                 <motion.div 
                   key={category}
                   whileHover={{ y: -5, rotate: idx % 2 === 0 ? 1 : -1 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`
                     p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-4 border-marty-dark transition-all duration-300
                     ${idx === 0 ? 'lg:col-span-2 bg-white' : idx === 4 ? 'md:col-span-2 lg:col-span-1 bg-marty-blue text-white' : 'bg-marty-cream'}
@@ -642,6 +680,7 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 10 }}
+                  whileTap={{ scale: 0.95 }}
                   className="flex items-start gap-4 p-4 md:p-5 bg-marty-cream border-2 border-marty-dark rounded-2xl hover:bg-marty-blue hover:text-white transition-all group cursor-pointer"
                 >
                   <div className="p-2 md:p-3 bg-white border-2 border-marty-dark rounded-xl group-hover:scale-110 transition-transform shadow-[3px_3px_0px_0px_#3A3A3A]">
@@ -686,14 +725,16 @@ export default function App() {
             </div>
 
             <div className="mt-12 flex flex-col gap-4">
-               <a 
+               <motion.a 
                  href={PUBLICATIONS[0].link} 
                  target="_blank"
-                 className="flex items-center justify-between p-4 bg-marty-orange text-white rounded-2xl border-2 border-marty-dark font-display text-xl uppercase tracking-wider hover:bg-white hover:text-marty-orange pop-transition shadow-[6px_6px_0px_0px_#3A3A3A]"
+                 whileHover={{ scale: 1.02 }}
+                 whileTap={{ scale: 0.98 }}
+                 className="flex items-center justify-between p-4 bg-marty-orange text-white rounded-2xl border-2 border-marty-dark font-display text-xl uppercase tracking-wider hover:bg-white hover:text-marty-orange transition-all shadow-[6px_6px_0px_0px_#3A3A3A]"
                >
                  <span>View Publication</span>
                  <ArrowUpRight className="w-6 h-6" />
-               </a>
+               </motion.a>
                <div className="flex items-center gap-2 font-mono text-[10px] font-black uppercase opacity-40">
                   <span>IEEE Xplore Digital Library</span>
                   <div className="w-12 h-[1px] bg-current"></div>
@@ -736,18 +777,20 @@ export default function App() {
                   { name: 'LeetCode', url: 'https://leetcode.com/u/__Sachin/', icon: <Terminal /> },
                   { name: 'Email', url: 'mailto:sachinrc2006@gmail.com', icon: <Mail /> }
                 ].map(social => (
-                  <a 
+                  <motion.a 
                     key={social.name} 
                     href={social.url} 
                     target="_blank"
-                    className="flex items-center justify-between p-4 md:p-6 bg-white/10 border-2 border-white/20 rounded-[1.5rem] md:rounded-[2rem] hover:bg-white hover:text-marty-red pop-transition group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center justify-between p-4 md:p-6 bg-white/10 border-2 border-white/20 rounded-[1.5rem] md:rounded-[2rem] hover:bg-white hover:text-marty-red transition-all group"
                   >
                     <div className="flex items-center gap-3">
                       {social.icon}
                       <span className="font-display text-xl md:text-2xl uppercase tracking-wider">{social.name}</span>
                     </div>
                     <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
+                  </motion.a>
                 ))}
               </div>
               
